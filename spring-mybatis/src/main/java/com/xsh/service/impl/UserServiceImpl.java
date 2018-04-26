@@ -1,30 +1,31 @@
 package com.xsh.service.impl;
 
-import java.util.List;
-
+import com.xsh.dao.UserMapper;
+import com.xsh.pojo.db.User;
+import com.xsh.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xsh.dao.UserInfoMapper;
-import com.xsh.model.UserInfo;
-import com.xsh.service.UserService;
-
 /**
- * 创建时间：2015-1-27 下午5:22:59
- * 
- * @author andy
- * @version 2.2
+ * @Author:xieshuang
+ * @Description:
+ * @Date:Create in 16:23 2018/4/26
+ * @Modified By :
  */
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService {
 
-	@Autowired
-	private UserInfoMapper userInfoMapper;
+    @Autowired
+    UserMapper userMapper;
 
-
-	@Override
-	public List<UserInfo> getUsers() {
-		return userInfoMapper.selectAll();
-	}
-
+    /**
+     * 根据用户名和密码获取用户信息
+     * @param userName
+     * @param password
+     * @return
+     */
+    @Override
+    public User getUser(String userName, String password) {
+        return userMapper.getUser(userName,password);
+    }
 }
