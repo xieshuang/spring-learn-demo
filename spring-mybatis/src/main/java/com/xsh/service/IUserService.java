@@ -1,6 +1,8 @@
 package com.xsh.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xsh.pojo.db.User;
+import org.apache.ibatis.session.RowBounds;
 
 /**
  * @Author:xieshuang
@@ -16,4 +18,12 @@ public interface IUserService extends IBaseService<User>{
      * @return
      */
     User getUser(String userName, String password);
+
+    /**
+     * 分页查询
+     * @param user
+     * @param rowBounds
+     * @return
+     */
+    PageInfo<User> getUserListByPage(User user, RowBounds rowBounds);
 }
