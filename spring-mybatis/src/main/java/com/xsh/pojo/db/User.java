@@ -1,5 +1,7 @@
 package com.xsh.pojo.db;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -93,6 +95,7 @@ public class User {
      * 获取生日
      * @return birthday - 生日
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public Date getBirthday() {
         return birthday;
     }
