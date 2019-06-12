@@ -30,7 +30,7 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         //获取用户名
         String username = (String)token.getPrincipal();
-        //获取用户登录次数
+        //获取用户登录次数 这里可以换成原子类
         String count = redisTemplate.opsForValue().get(getRedisKickoutKey(username));
         Integer retryCount = Integer.parseInt(count == null? "0":count);
         if (retryCount == null) {
