@@ -93,6 +93,7 @@ public class ShiroConfig {
     }
 
     //自定义sessionManager
+    //会话管理是用来管理Session的生命周期的 分布式环境下可以借助redis实现session共享
     @Bean
     public org.apache.shiro.session.mgt.SessionManager sessionManager() {
         SessionManager mySessionManager = new SessionManager();
@@ -105,7 +106,7 @@ public class ShiroConfig {
      * cacheManager 缓存 redis实现
      * <p>
      * 使用的是shiro-redis开源插件
-     *
+     * 缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能
      * @return
      */
     @Bean
