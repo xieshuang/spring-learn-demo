@@ -1,4 +1,4 @@
-package com.github.xsh.springshiro.config;
+package com.github.xsh.springshiro.config.shiro;
 
 import com.github.xsh.springshiro.model.User;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -7,6 +7,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -48,7 +49,7 @@ public class ShiroRealm extends AuthorizingRealm {
         String username = (String)token.getPrincipal();
         //根据用户名从db获取用户信息 这里用mock数据
         User userInfo = new User(username);
-        userInfo.setPassword("123456");
+        userInfo.setPassword(new SimpleHash("MD5","123456",username,2).toHex());
         userInfo.setEnabled(true);
         if (!userInfo.getEnabled()) { //账户冻结
             throw new LockedAccountException();
